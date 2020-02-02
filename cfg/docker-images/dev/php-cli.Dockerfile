@@ -10,4 +10,6 @@ RUN curl https://getcomposer.org/installer -o composer-install.php \
   && php composer-install.php --install-dir=/usr/local/bin --filename="composer" \
   && rm composer-install.php
 
+RUN composer global require hirak/prestissimo
+
 WORKDIR /app
