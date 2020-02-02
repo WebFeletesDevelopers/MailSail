@@ -1,0 +1,8 @@
+version: "3.4"
+services:
+  php:
+    build:
+      context: .
+      dockerfile: cfg/docker-images/dev/php-cli.Dockerfile
+    volumes:
+    - ".:/app"
