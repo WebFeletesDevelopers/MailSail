@@ -5,6 +5,11 @@ namespace WebFeletesDevelopers\MailSail\Test\Unit\Domain\SMTPLoginData;
 use PHPUnit\Framework\TestCase;
 use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 
+/**
+ * Class SMTPLoginDataTest
+ * @package WebFeletesDevelopers\MailSail\Test\Unit\Domain\SMTPLoginData
+ * @author WebFeletesDevelopers
+ */
 class SMTPLoginDataTest extends TestCase
 {
     /**
