@@ -9,7 +9,10 @@ docker-images-dev:
 dependencies-dev:
 	$(dcompose) -f $(devfile) run $(php_container) composer install
 
-build-dev: docker-images-dev dependencies-dev
+scripts:
+	sh cfg/scripts/set_up_git_hooks.sh
+
+build-dev: docker-images-dev dependencies-dev scripts
 
 phpunit:
 	$(dcompose) -f $(devfile) run $(php_container) php vendor/bin/phpunit -c test/phpunit.xml
