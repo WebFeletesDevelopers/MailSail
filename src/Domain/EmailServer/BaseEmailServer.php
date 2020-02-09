@@ -9,7 +9,7 @@ use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
  * @package WebFeletesDevelopers\MailSail\Domain\EmailServer
  * @author WebFeletesDevelopers
  */
-abstract class BaseEmailServer
+abstract class BaseEmailServer implements EmailServerInterface
 {
     protected const ENCRYPTION_TLS = 'tls';
     protected const ENCRYPTION_SSL = 'ssl';

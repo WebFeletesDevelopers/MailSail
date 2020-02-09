@@ -3,10 +3,10 @@
 namespace WebFeletesDevelopers\MailSail\Test\Unit\Domain\Email;
 
 use Exception;
-use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use WebFeletesDevelopers\MailSail\Domain\Email\EmailAddress;
 use WebFeletesDevelopers\MailSail\Domain\Email\InvalidEmailAddressException;
+use WebFeletesDevelopers\MailSail\Test\DataProvider\Email\EmailDataProvider;
 
 /**
  * Class EmailTest
@@ -15,11 +15,6 @@ use WebFeletesDevelopers\MailSail\Domain\Email\InvalidEmailAddressException;
  */
 class EmailTest extends TestCase
 {
-    protected function tearDown(): void
-    {
-        m::close();
-    }
-
     /**
      * @test
      * @dataProvider emailAddressProvider
@@ -50,4 +45,28 @@ class EmailTest extends TestCase
         ];
     }
 
+    /**
+     * @test
+     */
+    public function itShouldCreateEmail(): void
+    {
+        $email = EmailDataProvider::getOne();
+
+        $this->assertSame(
+            EmailDataProvider::EMAIL_FROM,
+            $email->from()->address()
+        );
+        $this->assertSame(
+            EmailDataProvider::EMAIL_TO,
+            $email->to()->address()
+        );
+        $this->assertSame(
+            EmailDataProvider::EMAIL_SUBJECT,
+            $email->subject()
+        );
+        $this->assertSame(
+            EmailDataProvider::EMAIL_BODY,
+            $email->body()
+        );
+    }
 }

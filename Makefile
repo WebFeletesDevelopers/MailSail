@@ -1,6 +1,7 @@
 dcompose=docker-compose
 devfile=docker-compose-dev.yml
 php_container=php
+mailhog_container=maildev
 
 docker-images-dev:
 	$(dcompose) -f $(devfile) pull
@@ -14,11 +15,19 @@ scripts:
 
 build-dev: docker-images-dev dependencies-dev scripts
 
-phpunit:
-	$(dcompose) -f $(devfile) run $(php_container) php vendor/bin/phpunit -c test/phpunit.xml
+maildev-start:
+	$(dcompose) -f $(devfile) up -d $(mailhog_container)
 
-phpunit-coverage:
-	$(dcompose) -f $(devfile) run $(php_container) php vendor/bin/phpunit -c test/phpunit.xml --coverage-html test/coverage/unit
+maildev-stop:
+	$(dcompose) -f $(devfile) stop $(mailhog_container)
+
+phpunit: maildev-start
+	$(dcompose) -f $(devfile) run $(php_container) php vendor/bin/phpunit -c test/phpunit.xml
+	make maildev-stop
+
+phpunit-coverage: maildev-start
+	$(dcompose) -f $(devfile) run $(php_container) php vendor/bin/phpunit -c test/phpunit.xml --coverage-html test/coverage
+	make maildev-stop
 
 command:
 	$(dcompose) -f $(devfile) run $(php_container) $(args)
