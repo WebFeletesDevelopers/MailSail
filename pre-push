@@ -285,9 +285,9 @@ echo "Se han completado los tests sin problemas, commit preparado"
 echo -e ${NA}
 }
 
-echo -e "${CYAN}Ejecutando tests unitarios…${NA}"
+echo -e "${CYAN}Ejecutando tests unitarios y de integración…${NA}"
 if ! make phpunit; then
-  echo -e "${RED}Error al ejecutar tests unitarios${NA}"
+  echo -e "${RED}Error al ejecutar tests unitarios y de integración${NA}"
   pilotes
 fi
 
