@@ -1,0 +1,39 @@
+{
+    "name": "webfeletesdevelopers/mailsail",
+    "description": "Wrapper de PHPMailer que facilita el testeo y uso de la librería",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Web Feletes Developers",
+            "email": "desarrollo@feletes.es"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WebFeletesDevelopers\\MailSail\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WebFeletesDevelopers\\MailSail\\Test\\": "test"
+        }
+    },
+    "require": {
+        "php": "^7.4",
+        "phpmailer/phpmailer": "^6",
+        "psr/log": "^1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8",
+        "mockery/mockery" : "^1.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-mockery": "^0.12.3",
+        "squizlabs/php_codesniffer": "^3",
+        "infection/infection": "^0.15.2"
+    },
+    "scripts": {
+        "post-install-cmd": []
+    }
+}

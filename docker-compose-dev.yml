@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  php:
+    build:
+      context: .
+      dockerfile: cfg/docker-images/dev/php-cli.Dockerfile
+    volumes:
+    - ".:/app"
+
+  maildev:
+    build:
+      context: .
+      dockerfile: cfg/docker-images/dev/maildev.Dockerfile
+    ports:
+    - "80:1080"
+    - "25:1025"
