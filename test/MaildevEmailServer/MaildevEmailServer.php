@@ -14,7 +14,7 @@ use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 final class MaildevEmailServer extends BaseEmailServer
 {
     private const MAILDEV_SMTP_HOST = 'maildev';
-    private const MAILDEV_SMTP_PORT = '1025';
+    private const MAILDEV_SMTP_PORT = 1025;
     private const MAILDEV_SMTP_USER = 'smtp_user';
     private const MAILDEV_SMTP_PASS = 'smtp_password';
 

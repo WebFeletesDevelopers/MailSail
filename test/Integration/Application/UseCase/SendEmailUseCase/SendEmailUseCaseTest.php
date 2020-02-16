@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use WebFeletesDevelopers\MailSail\Application\UseCase\SendEmailUseCase\SendEmailArguments;
 use WebFeletesDevelopers\MailSail\Application\UseCase\SendEmailUseCase\SendEmailUseCase;
 use WebFeletesDevelopers\MailSail\Infrastructure\Email\PHPMailerEmailService;
+use WebFeletesDevelopers\MailSail\Infrastructure\Logger\NullLogger;
 use WebFeletesDevelopers\MailSail\Test\MaildevEmailServer\MaildevEmailServer;
 
 /**
@@ -38,7 +39,7 @@ class SendEmailUseCaseTest extends TestCase
             self::EMAIL_BODY,
             new MaildevEmailServer()
         );
-        $useCase = new SendEmailUseCase(new PHPMailerEmailService(new PHPMailer()));
+        $useCase = new SendEmailUseCase(new PHPMailerEmailService(new PHPMailer(), new NullLogger()));
 
         $response = $useCase->handle($arguments);
 
@@ -63,25 +64,41 @@ class SendEmailUseCaseTest extends TestCase
             self::EMAIL_BODY,
             rtrim($emailData['html'])
         );
-
     }
 
     private function deleteMailFromServer(): void
     {
         $ch = curl_init('http://maildev:1080/email/all');
+
+        if ($ch === false) {
+            $this->fail('Curl handler broke');
+            return;
+        }
+
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         curl_exec($ch);
         curl_close($ch);
     }
 
     /**
-     * @return array
+     * @return array<array>
      */
     private function getMailDataFromAPI(): array
     {
         $ch = curl_init('http://maildev:1080/email');
+
+        if ($ch === false) {
+            $this->fail('Curl handler broke');
+            return [];
+        }
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $raw = curl_exec($ch);
+
+        if (! is_string($raw)) {
+            $this->fail('Failed to recover data from the API');
+            return [];
+        }
         $emailData = json_decode($raw, true);
 
         curl_close($ch);

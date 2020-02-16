@@ -81,12 +81,12 @@ class SendEmailUseCaseTest extends TestCase
     }
 
     /**
-     * @param $emailServer
+     * @param EmailServerInterface $emailServer
      * @return SendEmailArguments
      */
-    private function getArguments($emailServer): SendEmailArguments
+    private function getArguments(EmailServerInterface $emailServer): SendEmailArguments
     {
-        return $arguments = new SendEmailArguments(
+        return new SendEmailArguments(
             EmailDataProvider::EMAIL_FROM,
             EmailDataProvider::EMAIL_TO,
             EmailDataProvider::EMAIL_SUBJECT,

@@ -18,6 +18,9 @@ class EmailTest extends TestCase
     /**
      * @test
      * @dataProvider emailAddressProvider
+     * @param string $email
+     * @param string | InvalidEmailAddressException $expected
+     * @throws InvalidEmailAddressException
      */
     public function itShouldProcessEmailAddresses(
         string $email,
@@ -34,6 +37,9 @@ class EmailTest extends TestCase
         );
     }
 
+    /**
+     * @return array<array<string | InvalidEmailAddressException>>
+     */
     public function emailAddressProvider(): array
     {
         return [

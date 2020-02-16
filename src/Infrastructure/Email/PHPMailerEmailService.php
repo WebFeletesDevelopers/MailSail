@@ -5,6 +5,7 @@ namespace WebFeletesDevelopers\MailSail\Infrastructure\Email;
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Psr\Log\LoggerInterface;
 use WebFeletesDevelopers\MailSail\Domain\Email\Email;
 use WebFeletesDevelopers\MailSail\Domain\Email\EmailServiceInterface;
 use WebFeletesDevelopers\MailSail\Domain\EmailServer\EmailServerInterface;
@@ -19,13 +20,18 @@ class PHPMailerEmailService implements EmailServiceInterface
     /** @var PHPMailer */
     private PHPMailer $mailer;
 
+    /** @var LoggerInterface */
+    private LoggerInterface $logger;
+
     /**
      * PHPMailerEmailService constructor.
      * @param PHPMailer $mailer
+     * @param LoggerInterface $logger
      */
-    public function __construct(PHPMailer $mailer)
+    public function __construct(PHPMailer $mailer, LoggerInterface $logger)
     {
         $this->mailer = $mailer;
+        $this->logger = $logger;
     }
 
     /**
@@ -45,10 +51,10 @@ class PHPMailerEmailService implements EmailServiceInterface
         } catch (Exception $e) {
             throw PHPMailerEmailServiceException::fromFailedSendMessage($this->mailer->ErrorInfo);
         }
-        if (! $result) {
+        if ($result === false) {
             throw PHPMailerEmailServiceException::fromFailedSendMessageUnknown();
         }
-        return true;
+        return $result;
     }
 
     /**
@@ -62,8 +68,9 @@ class PHPMailerEmailService implements EmailServiceInterface
         $mailer->isSMTP();
 
         if ($emailServer->debug()) {
-            // TODO: Sacar la salida a un logger.
             $mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+            // TODO: Pasar un DataTransformer de número de level a constante de AbstractLogger.
+            $mailer->Debugoutput = $this->logger;
         }
 
         $mailer->Host = $emailServer->host();

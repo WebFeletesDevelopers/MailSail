@@ -6,6 +6,7 @@ use Exception;
 use Mockery as m;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use WebFeletesDevelopers\MailSail\Domain\EmailServer\EmailServerInterface;
 use WebFeletesDevelopers\MailSail\Infrastructure\Email\PHPMailerEmailService;
 use WebFeletesDevelopers\MailSail\Infrastructure\Email\PHPMailerEmailServiceException;
@@ -42,7 +43,9 @@ class PHPMailerEmailServiceTest extends TestCase
         $phpMailer->shouldReceive('msgHtml')->with(EmailDataProvider::EMAIL_BODY);
         $phpMailer->shouldReceive('send')->andReturn(true);
 
-        $sut = new PHPMailerEmailService($phpMailer);
+        $logger = m::mock(LoggerInterface::class);
+
+        $sut = new PHPMailerEmailService($phpMailer, $logger);
 
         $result = $sut->send(
             $emailServer,
@@ -83,12 +86,16 @@ class PHPMailerEmailServiceTest extends TestCase
     public function handleMailerError(): void
     {
         $this->expectException(PHPMailerEmailServiceException::class);
+        $this->expectExceptionMessage('The email failed to send. Error: ');
+
         $emailServer = m::mock(EmailServerInterface::class);
 
         $phpMailer = m::mock(PHPMailer::class);
         $phpMailer->shouldReceive('isSMTP')->andThrow(Exception::class);
 
-        $sut = new PHPMailerEmailService($phpMailer);
+        $logger = m::mock(LoggerInterface::class);
+
+        $sut = new PHPMailerEmailService($phpMailer, $logger);
 
         $sut->send(
             $emailServer,
@@ -102,6 +109,8 @@ class PHPMailerEmailServiceTest extends TestCase
     public function handleSendError(): void
     {
         $this->expectException(PHPMailerEmailServiceException::class);
+        $this->expectErrorMessage('The email failed to send because of an unknown error');
+
         $loginData = SMTPLoginDataProvider::getSMTPLoginData();
         $emailServer = m::mock(EmailServerInterface::class);
         $emailServer->shouldReceive('debug')->andReturn(true);
@@ -117,7 +126,9 @@ class PHPMailerEmailServiceTest extends TestCase
         $phpMailer->shouldReceive('msgHtml')->with(EmailDataProvider::EMAIL_BODY);
         $phpMailer->shouldReceive('send')->andReturn(false);
 
-        $sut = new PHPMailerEmailService($phpMailer);
+        $logger = m::mock(LoggerInterface::class);
+
+        $sut = new PHPMailerEmailService($phpMailer, $logger);
 
         $sut->send(
             $emailServer,

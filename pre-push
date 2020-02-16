@@ -291,6 +291,18 @@ if ! make phpunit; then
   pilotes
 fi
 
+echo -e "${CYAN}Ejecutando PHPStan al nivel 8…${NA}"
+if ! make phpstan; then
+  echo -e "${RED}Error al pasar PHPStan${NA}"
+  pilotes
+fi
+
+echo -e "${CYAN}Ejecutando PHP Code Sniffer…${NA}"
+if ! make phpcs; then
+  echo -e "${RED}Error al pasar PHP Code Sniffer${NA}"
+  pilotes
+fi
+
 oumama
 
 exit $?

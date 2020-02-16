@@ -15,7 +15,7 @@ class InvalidEmailAddressException extends Exception
 
     /**
      * @param string $email
-     * @return static
+     * @return self
      */
     public static function fromInvalidEmailFormat(string $email): self
     {

@@ -31,3 +31,12 @@ phpunit-coverage: maildev-start
 
 command:
 	$(dcompose) -f $(devfile) run $(php_container) $(args)
+
+phpstan:
+	$(dcompose) -f $(devfile) run $(php_container) vendor/bin/phpstan analyse src test --level 8
+
+phpcs:
+	$(dcompose) -f $(devfile) run $(php_container) vendor/bin/phpcs --standard=PSR12 --ignore="test/coverage" -p --colors src test
+
+infection:
+	$(dcompose) -f $(devfile) run $(php_container) vendor/bin/infection --threads=4

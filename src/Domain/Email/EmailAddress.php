@@ -31,7 +31,7 @@ class EmailAddress
 
     /**
      * @param string $emailAddress
-     * @return static
+     * @return self
      * @throws InvalidEmailAddressException
      */
     public static function fromEmailString(string $emailAddress): self

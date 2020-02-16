@@ -12,11 +12,11 @@ use Exception;
 class PHPMailerEmailServiceException extends Exception
 {
     private const FAILED_SEND_MESSAGE = 'The email failed to send. Error: %s';
-    private const FAILED_SEND_MESSAGE_UNKNOWN = 'The emailed failed to send because of an unknown error.';
+    private const FAILED_SEND_MESSAGE_UNKNOWN = 'The email failed to send because of an unknown error.';
 
     /**
      * @param string $error
-     * @return static
+     * @return self
      */
     public static function fromFailedSendMessage(string $error): self
     {
@@ -24,7 +24,7 @@ class PHPMailerEmailServiceException extends Exception
     }
 
     /**
-     * @return static
+     * @return self
      */
     public static function fromFailedSendMessageUnknown(): self
     {

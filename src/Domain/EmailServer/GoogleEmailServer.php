@@ -12,7 +12,7 @@ use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 final class GoogleEmailServer extends BaseEmailServer
 {
     private const GOOGLE_SMTP_HOST = 'smtp.gmail.com';
-    private const GOOGLE_SMTP_PORT = '587';
+    private const GOOGLE_SMTP_PORT = 587;
 
     /**
      * GoogleEmailServer constructor.

@@ -12,7 +12,7 @@ use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 class SMTPLoginDataProvider
 {
     public const LOGIN_USER = 'user@oumama.com';
-    public const LOGIN_PASSWORD= 'I am very secure!!';
+    public const LOGIN_PASSWORD = 'I am very secure!!';
 
     /**
      * @param string|null $user

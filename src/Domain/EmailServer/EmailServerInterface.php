@@ -2,7 +2,6 @@
 
 namespace WebFeletesDevelopers\MailSail\Domain\EmailServer;
 
-
 use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 
 /**

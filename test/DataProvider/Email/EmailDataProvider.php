@@ -1,6 +1,5 @@
 <?php
 
-
 namespace WebFeletesDevelopers\MailSail\Test\DataProvider\Email;
 
 use WebFeletesDevelopers\MailSail\Domain\Email\Email;
