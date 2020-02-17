@@ -4,6 +4,9 @@ namespace WebFeletesDevelopers\MailSail\Domain\SMTPLoginData;
 
 /**
  * Class LoginData
+ *
+ * This class contains the user and password required to log into an EmailServer.
+ *
  * @package WebFeletesDevelopers\MailSail\Domain\LoginData
  * @author WebFeletesDevelopers
  */

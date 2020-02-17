@@ -8,7 +8,11 @@ use WebFeletesDevelopers\MailSail\Domain\Email\EmailAddress;
 use WebFeletesDevelopers\MailSail\Domain\Email\EmailServiceInterface;
 
 /**
- * Class SendEmailUseCase
+ * Class SendEmailUseCase.
+ *
+ * This class will handle a SendEmailArguments, trying to send an Email using the provided EmailService
+ * over an EmailServer.
+ *
  * @package WebFeletesDevelopers\MailSail\Application\UseCase\SendEmailUseCase
  * @author WebFeletesDevelopers
  */
@@ -27,8 +31,13 @@ class SendEmailUseCase
     }
 
     /**
-     * @param SendEmailArguments $arguments
-     * @return SendEmailResponse
+     * Create two addresses, an Email, then use an EmailServiceInterface to send that Email.
+     * This will return a SendEmailResponse.
+     *
+     * @see $mailer
+     *
+     * @param SendEmailArguments $arguments Class that will contain the Email data.
+     * @return SendEmailResponse Response that will be success if the Email is sent with the EmailService
      */
     public function handle(SendEmailArguments $arguments): SendEmailResponse
     {

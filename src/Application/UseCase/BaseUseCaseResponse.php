@@ -5,7 +5,10 @@ namespace WebFeletesDevelopers\MailSail\Application\UseCase;
 use Exception;
 
 /**
- * Class BaseUseCaseResponse
+ * Class BaseUseCaseResponse.
+ *
+ * This class contains the common UseCaseResponse fields.
+ *
  * @package WebFeletesDevelopers\MailSail\Application\UseCase
  * @author WebFeletesDevelopers
  */
@@ -27,6 +30,8 @@ class BaseUseCaseResponse
     }
 
     /**
+     * Returns true if there was no error running the use case.
+     *
      * @return bool
      */
     public function success(): bool
@@ -35,6 +40,8 @@ class BaseUseCaseResponse
     }
 
     /**
+     * Mark the use case as failed, and set the error to an Exception.
+     *
      * @param Exception $e
      * @return void
      */
@@ -45,6 +52,8 @@ class BaseUseCaseResponse
     }
 
     /**
+     * Return an Exception if the use case failed, or null if it succeeded.
+     *
      * @return Exception|null
      */
     public function error(): ?Exception

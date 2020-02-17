@@ -5,7 +5,10 @@ namespace WebFeletesDevelopers\MailSail\Application\UseCase\SendEmailUseCase;
 use WebFeletesDevelopers\MailSail\Domain\EmailServer\EmailServerInterface;
 
 /**
- * Class SendEmailArguments
+ * Class SendEmailArguments.
+ *
+ * This class will contain the Email data and an EmailServer.
+ *
  * @package WebFeletesDevelopers\MailSail\Application\UseCase\SendEmailUseCase
  * @author WebFeletesDevelopers
  */

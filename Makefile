@@ -3,6 +3,8 @@ devfile=docker-compose-dev.yml
 php_container=php
 mailhog_container=maildev
 
+.PHONY: docs
+
 docker-images-dev:
 	$(dcompose) -f $(devfile) pull
 	$(dcompose) -f $(devfile) build
@@ -40,3 +42,6 @@ phpcs:
 
 infection:
 	$(dcompose) -f $(devfile) run $(php_container) vendor/bin/infection --threads=4
+
+docs:
+	$(dcompose) -f $(devfile) run $(php_container) phpdoc -d ./src -t ./docs --template="clean"
