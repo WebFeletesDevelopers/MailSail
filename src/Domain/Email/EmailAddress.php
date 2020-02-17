@@ -3,7 +3,10 @@
 namespace WebFeletesDevelopers\MailSail\Domain\Email;
 
 /**
- * Class EmailAddress
+ * Class EmailAddress.
+ *
+ * This class represents an Email address.
+ *
  * @package WebFeletesDevelopers\MailSail\Domain\Email
  * @author WebFeletesDevelopers
  */
@@ -30,9 +33,11 @@ class EmailAddress
     }
 
     /**
+     * Create a new EmailAddress from a string. The string will be checked for validity.
+     *
      * @param string $emailAddress
      * @return self
-     * @throws InvalidEmailAddressException
+     * @throws InvalidEmailAddressException if the string is not a valid email address.
      */
     public static function fromEmailString(string $emailAddress): self
     {

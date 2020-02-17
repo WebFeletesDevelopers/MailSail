@@ -35,6 +35,8 @@ class PHPMailerEmailService implements EmailServiceInterface
     }
 
     /**
+     * Prepare an Email to be sent using an EmailServerInterface credentials, using native PHPMailer functions.
+     *
      * @param EmailServerInterface $emailServer
      * @param Email $email
      * @return bool
@@ -58,6 +60,8 @@ class PHPMailerEmailService implements EmailServiceInterface
     }
 
     /**
+     * Set the PHPMailer login data (user, password, port, SMTP, encryption, debug if needed...).
+     *
      * @param EmailServerInterface $emailServer
      * @param PHPMailer $mailer
      */
@@ -69,7 +73,6 @@ class PHPMailerEmailService implements EmailServiceInterface
 
         if ($emailServer->debug()) {
             $mailer->SMTPDebug = SMTP::DEBUG_SERVER;
-            // TODO: Pasar un DataTransformer de número de level a constante de AbstractLogger.
             $mailer->Debugoutput = $this->logger;
         }
 
@@ -85,6 +88,8 @@ class PHPMailerEmailService implements EmailServiceInterface
     }
 
     /**
+     * Add the body, subject, sender and recipient.
+     *
      * @param Email $email
      * @param PHPMailer $mailer
      * @throws Exception

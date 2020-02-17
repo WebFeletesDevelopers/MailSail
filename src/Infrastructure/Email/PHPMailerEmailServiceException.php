@@ -15,7 +15,9 @@ class PHPMailerEmailServiceException extends Exception
     private const FAILED_SEND_MESSAGE_UNKNOWN = 'The email failed to send because of an unknown error.';
 
     /**
-     * @param string $error
+     * Called when any of the native PHPMailer functions failed.
+     *
+     * @param string $error PHPMailer native error description.
      * @return self
      */
     public static function fromFailedSendMessage(string $error): self
@@ -24,6 +26,8 @@ class PHPMailerEmailServiceException extends Exception
     }
 
     /**
+     * Called when the result of PHPMailer::send() is false.
+     *
      * @return self
      */
     public static function fromFailedSendMessageUnknown(): self

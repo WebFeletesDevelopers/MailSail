@@ -12,6 +12,9 @@ use Psr\Log\AbstractLogger;
 class NullLogger extends AbstractLogger
 {
     /**
+     * Do literally nothing. This class is used to supply a Logger to a class that needs
+     * a class implementing PSR-3 LoggerInterface, but you don't want to log anything.
+     *
      * @param mixed $level
      * @param string $message
      * @param array<string> $context

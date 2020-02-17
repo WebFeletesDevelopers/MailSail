@@ -3,7 +3,10 @@
 namespace WebFeletesDevelopers\MailSail\Domain\Email;
 
 /**
- * Class Email
+ * Class Email.
+ *
+ * This class represents an Email, having a from address, to address, a subject and the HTML-compatible body.
+ *
  * @package WebFeletesDevelopers\MailSail\Domain\Email
  * @author WebFeletesDevelopers
  */

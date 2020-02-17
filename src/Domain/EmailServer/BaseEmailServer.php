@@ -5,7 +5,11 @@ namespace WebFeletesDevelopers\MailSail\Domain\EmailServer;
 use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 
 /**
- * Class BaseEmailServer
+ * Class BaseEmailServer.
+ *
+ * Abstract class representing an EmailServer that will contain the host, port and SMTPLoginData,
+ * and might contain an encryption method.
+ *
  * @package WebFeletesDevelopers\MailSail\Domain\EmailServer
  * @author WebFeletesDevelopers
  */

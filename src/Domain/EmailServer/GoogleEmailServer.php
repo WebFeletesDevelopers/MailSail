@@ -5,7 +5,10 @@ namespace WebFeletesDevelopers\MailSail\Domain\EmailServer;
 use WebFeletesDevelopers\MailSail\Domain\SMTPLoginData\SMTPLoginData;
 
 /**
- * Class GoogleEmailServer
+ * Class GoogleEmailServer.
+ *
+ * This class contains a preconfigured EmailServer for Google Mail (GMail).
+ *
  * @package WebFeletesDevelopers\MailSail\Domain\EmailServer
  * @author WebFeletesDevelopers
  */

@@ -14,6 +14,8 @@ class InvalidEmailAddressException extends Exception
     private const INVALID_EMAIL_FORMAT_MESSAGE = 'The email %s has an invalid format.';
 
     /**
+     * Called when an EmailAddress has an invalid format.
+     *
      * @param string $email
      * @return self
      */
