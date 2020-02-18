@@ -15,6 +15,7 @@ RUN apt-get update -y \
     graphviz \
     libicu-dev \
     git \
+    unzip \
  && rm -rf /var/lib/apt/lists/*
 
 RUN composer global require hirak/prestissimo
