@@ -53,7 +53,6 @@ class SendEmailUseCase
             );
 
             $this->mailer->send(
-                $arguments->mailServer(),
                 $email
             );
         } catch (Exception $e) {

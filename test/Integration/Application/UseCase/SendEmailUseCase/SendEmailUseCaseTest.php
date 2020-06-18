@@ -36,10 +36,15 @@ class SendEmailUseCaseTest extends TestCase
             self::EMAIL_FROM,
             self::EMAIL_TO,
             self::EMAIL_SUBJECT,
-            self::EMAIL_BODY,
-            new MaildevEmailServer()
+            self::EMAIL_BODY
         );
-        $useCase = new SendEmailUseCase(new PHPMailerEmailService(new PHPMailer(), new NullLogger()));
+        $useCase = new SendEmailUseCase(
+            new PHPMailerEmailService(
+                new PHPMailer(),
+                new NullLogger(),
+                new MaildevEmailServer()
+            )
+        );
 
         $response = $useCase->handle($arguments);
 
