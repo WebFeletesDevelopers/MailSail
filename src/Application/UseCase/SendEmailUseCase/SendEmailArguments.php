@@ -26,29 +26,23 @@ class SendEmailArguments
     /** @var string */
     private string $body;
 
-    /** @var EmailServerInterface */
-    private EmailServerInterface $mailServer;
-
     /**
      * SendEmailArguments constructor.
      * @param string $from
      * @param string $to
      * @param string $subject
      * @param string $body
-     * @param EmailServerInterface $mailServer
      */
     public function __construct(
         string $from,
         string $to,
         string $subject,
-        string $body,
-        EmailServerInterface $mailServer
+        string $body
     ) {
         $this->from = $from;
         $this->to = $to;
         $this->subject = $subject;
         $this->body = $body;
-        $this->mailServer = $mailServer;
     }
 
     /**
@@ -81,13 +75,5 @@ class SendEmailArguments
     public function body(): string
     {
         return $this->body;
-    }
-
-    /**
-     * @return EmailServerInterface
-     */
-    public function mailServer(): EmailServerInterface
-    {
-        return $this->mailServer;
     }
 }

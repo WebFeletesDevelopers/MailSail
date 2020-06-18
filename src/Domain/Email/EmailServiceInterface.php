@@ -17,12 +17,8 @@ interface EmailServiceInterface
     /**
      * Send an Email over a class implementing EmailServerInterface
      *
-     * @param EmailServerInterface $emailServer
      * @param Email $email
      * @return bool
      */
-    public function send(
-        EmailServerInterface $emailServer,
-        Email $email
-    ): bool;
+    public function send(Email $email): bool;
 }

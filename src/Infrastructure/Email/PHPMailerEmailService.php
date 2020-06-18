@@ -23,31 +23,35 @@ class PHPMailerEmailService implements EmailServiceInterface
     /** @var LoggerInterface */
     private LoggerInterface $logger;
 
+    private EmailServerInterface $mailServer;
+
     /**
      * PHPMailerEmailService constructor.
      * @param PHPMailer $mailer
      * @param LoggerInterface $logger
+     * @param EmailServerInterface $mailServer
      */
-    public function __construct(PHPMailer $mailer, LoggerInterface $logger)
-    {
+    public function __construct(
+        PHPMailer $mailer,
+        LoggerInterface $logger,
+        EmailServerInterface $mailServer
+    ) {
         $this->mailer = $mailer;
         $this->logger = $logger;
+        $this->mailServer = $mailServer;
     }
 
     /**
      * Prepare an Email to be sent using an EmailServerInterface credentials, using native PHPMailer functions.
      *
-     * @param EmailServerInterface $emailServer
      * @param Email $email
      * @return bool
      * @throws PHPMailerEmailServiceException
      */
-    public function send(
-        EmailServerInterface $emailServer,
-        Email $email
-    ): bool {
+    public function send(Email $email): bool
+    {
         try {
-            $this->login($emailServer, $this->mailer);
+            $this->login($this->mailServer, $this->mailer);
             $this->prepareMail($email, $this->mailer);
             $result = $this->mailer->send();
         } catch (Exception $e) {
@@ -56,7 +60,7 @@ class PHPMailerEmailService implements EmailServiceInterface
         if ($result === false) {
             throw PHPMailerEmailServiceException::fromFailedSendMessageUnknown();
         }
-        return $result;
+        return true;
     }
 
     /**

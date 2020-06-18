@@ -45,12 +45,9 @@ class PHPMailerEmailServiceTest extends TestCase
 
         $logger = m::mock(LoggerInterface::class);
 
-        $sut = new PHPMailerEmailService($phpMailer, $logger);
+        $sut = new PHPMailerEmailService($phpMailer, $logger, $emailServer);
 
-        $result = $sut->send(
-            $emailServer,
-            EmailDataProvider::getOne()
-        );
+        $result = $sut->send(EmailDataProvider::getOne());
 
         $this->assertTrue($result);
         $this->assertSame(
@@ -95,12 +92,9 @@ class PHPMailerEmailServiceTest extends TestCase
 
         $logger = m::mock(LoggerInterface::class);
 
-        $sut = new PHPMailerEmailService($phpMailer, $logger);
+        $sut = new PHPMailerEmailService($phpMailer, $logger, $emailServer);
 
-        $sut->send(
-            $emailServer,
-            EmailDataProvider::getOne()
-        );
+        $sut->send(EmailDataProvider::getOne());
     }
 
     /**
@@ -128,11 +122,8 @@ class PHPMailerEmailServiceTest extends TestCase
 
         $logger = m::mock(LoggerInterface::class);
 
-        $sut = new PHPMailerEmailService($phpMailer, $logger);
+        $sut = new PHPMailerEmailService($phpMailer, $logger, $emailServer);
 
-        $sut->send(
-            $emailServer,
-            EmailDataProvider::getOne()
-        );
+        $sut->send(EmailDataProvider::getOne());
     }
 }

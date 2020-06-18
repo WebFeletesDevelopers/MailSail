@@ -36,16 +36,10 @@ class SendEmailUseCaseTest extends TestCase
                 && $email->body() === EmailDataProvider::EMAIL_BODY;
         };
 
-        $emailServer = m::mock(EmailServerInterface::class);
-
         $emailService = m::mock(EmailServiceInterface::class);
-        $emailService->shouldReceive('send')
-            ->with(
-                $emailServer,
-                m::on($mailCheck)
-            )->andReturn('true');
+        $emailService->shouldReceive('send')->with(m::on($mailCheck))->andReturn('true');
 
-        $arguments = $this->getArguments($emailServer);
+        $arguments = $this->getArguments();
 
         $useCase = new SendEmailUseCase($emailService);
 
@@ -66,7 +60,7 @@ class SendEmailUseCaseTest extends TestCase
         $emailService->shouldReceive('send')
             ->andThrow(PHPMailerEmailServiceException::class);
 
-        $arguments = $this->getArguments($emailServer);
+        $arguments = $this->getArguments();
 
         $useCase = new SendEmailUseCase($emailService);
 
@@ -81,17 +75,15 @@ class SendEmailUseCaseTest extends TestCase
     }
 
     /**
-     * @param EmailServerInterface $emailServer
      * @return SendEmailArguments
      */
-    private function getArguments(EmailServerInterface $emailServer): SendEmailArguments
+    private function getArguments(): SendEmailArguments
     {
         return new SendEmailArguments(
             EmailDataProvider::EMAIL_FROM,
             EmailDataProvider::EMAIL_TO,
             EmailDataProvider::EMAIL_SUBJECT,
-            EmailDataProvider::EMAIL_BODY,
-            $emailServer
+            EmailDataProvider::EMAIL_BODY
         );
     }
 }
